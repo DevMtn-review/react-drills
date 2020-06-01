@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 
-function App() {
+export default function App() {
+  const arr = ['spaghetti', 'ice cream', 'sushi', 'bologna', 'cheese'];
+  const [inputState, setInputState] = useState('');
+  const filteredArray = arr.filter(food => {return(food.includes(inputState))})
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-3'>
+      <input onChange={e => {setInputState(e.target.value)}}/>
+      {inputState !== '' ? 
+      <div className='found-array'>
+        {filteredArray.map((word, i) => <h4 key={i}>{word}</h4>)}
+      </div>
+      :
+      null
+      }
     </div>
-  );
+  )
 }
-
-export default App;
