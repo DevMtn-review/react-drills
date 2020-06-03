@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import './App.css'
 
-function App() {
+export default function App() {
+  useEffect(() => {axios.get('https://swapi.dev/api/people').then(res => {setCharacters(res.data.results)})});
+  const [characters, setCharacters] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-8'>
+      {characters.map((char, i) => {
+        return(
+        <div key={i} className='character'>
+          <h2>Name: {char.name}</h2>
+          <h2>Birth year: {char.birth_year}</h2>
+          <h2>Height: {char.height}</h2>
+          <h2>Eye color: {char.eye_color}</h2>
+        </div>
+        )})}
     </div>
-  );
+  )
 }
-
-export default App;
