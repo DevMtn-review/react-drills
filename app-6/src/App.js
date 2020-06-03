@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import TodoList from './TodoList'
+import './App.css'
 
-function App() {
+export default function App() {
+  const [entry, setEntry] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const addToTasks = newEntry => {
+    setTasks([...tasks, entry]);
+    setEntry('');
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-6'>
+      <input onChange={e => {setEntry(e.target.value)}} placeholder='Enter new task...' value={entry}/>
+      <button onClick={addToTasks}>Add</button>
+      <TodoList tasks={tasks}/>
     </div>
-  );
+  )
 }
-
-export default App;
